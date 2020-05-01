@@ -1,6 +1,7 @@
 {
   "name": "equipe28app",
   "version": "0.0.0",
+  "description": "Exemplo prático",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
