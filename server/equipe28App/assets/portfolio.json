@@ -1,0 +1,18 @@
+[
+    {
+        "uid": "port_001",
+        "uid_company": "company_001",
+        "description": "Logo da loja",
+        "url_image": "image_01.jpg",
+        "lastupdate_date": "2020-04-20T15:15:01.000Z",
+        "lastupdate_uid_user": "user_001"
+    },
+    {
+        "uid": "port_002",
+        "uid_company": "company_002",
+        "description": "sofa modelo X",
+        "url_image": "image_02.jpg",
+        "lastupdate_date": "2020-04-20T15:15:01.000Z",
+        "lastupdate_uid_user": "user_002"
+    }
+]

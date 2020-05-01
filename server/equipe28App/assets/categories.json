@@ -1,0 +1,14 @@
+[
+    {
+        "uid": "cat_001",
+        "description": "Alimentação",
+        "lastupdate_date": "2020-04-20T15:15:01.000Z",
+        "lastupdate_uid_user": "user_adm"
+    },
+    {
+        "uid": "cat_002",
+        "description": "Moveis",
+        "lastupdate_date": "2020-04-20T15:15:01.000Z",
+        "lastupdate_uid_user": "user_adm"
+    }
+]

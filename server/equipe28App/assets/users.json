@@ -1,0 +1,18 @@
+[
+    {
+        "uid": "user_001",
+        "name": "Pedro Alvares Cabral",
+        "nickname": "Pedrinho do barco",
+        "url_avatar": "avatar_001.jpg",
+        "uid_user": "user_001",
+        "lastupdate_date": "2020-04-20T15:15:01.000Z"
+    },
+    {
+        "uid": "user_002",
+        "name": "Elizabeth Alexandra Mary Windsor",
+        "nickname": "Rainha Elizabeth",
+        "url_avatar": "avatar_002.jpg",
+        "uid_user": "user_002",
+        "lastupdate_date": "2020-04-20T15:15:01.000Z"
+    }
+]

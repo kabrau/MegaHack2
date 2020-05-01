@@ -1,0 +1,22 @@
+[
+    {
+        "uid": "company_001",
+        "name": "Bar do Nito",
+        "CNPJ": "99.999.999/0001-99",
+        "CEP": "90035-150",
+        "uid_category": "cat_001",
+        "adm_uid_user": "user_001",
+        "lastupdate_date": "2020-04-20T15:15:01.000Z",
+        "lastupdate_uid_user": "user_001"
+    },
+    {
+        "uid": "company_002",
+        "name": "Meu sofá",
+        "CNPJ": "88.999.999/0001-99",
+        "CEP": "90035-141",
+        "uid_category": "cat_002",
+        "adm_uid_user": "user_002",
+        "lastupdate_date": "2020-04-15T15:15:01.000Z",
+        "lastupdate_uid_user": "user_002"
+    }
+]

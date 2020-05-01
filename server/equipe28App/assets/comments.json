@@ -1,0 +1,16 @@
+[
+    {
+        "uid": "comment_001",
+        "uid_publication": "public_001",
+        "uid_user": "user_001",
+        "description": "blá blá blá do user user_001",
+        "date": "2020-05-01T15:15:01.000Z"
+    },
+    {
+        "uid": "comment002",
+        "uid_publication": "public_001",
+        "uid_user": "user_002",
+        "description": "blá blá blá do user_002",
+        "date": "2020-05-01T19:46:30.000Z"
+    }
+]

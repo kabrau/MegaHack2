@@ -1,10 +1,11 @@
 {
   "name": "equipe28app",
   "version": "0.0.0",
-  "description": "Exemplo prático",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "X1_start": "node ./bin/www",
+    "X_start": "nodemon server.js",
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,6 +14,10 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "pug": "^2.0.4",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "browser-sync": "^2.24.5",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "reload": "^2.2.2"
   }
 }
