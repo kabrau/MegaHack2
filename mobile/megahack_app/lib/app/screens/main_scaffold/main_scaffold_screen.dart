@@ -6,6 +6,7 @@ import 'package:megahackapp/app/screens/main_scaffold/components/app_bar.dart';
 import 'package:megahackapp/app/screens/main_scaffold/components/bottom_app_bar.dart';
 import 'package:megahackapp/app/screens/main_scaffold/main_scaffold_controller.dart';
 import 'package:megahackapp/app/screens/profile/profile_screen.dart';
+import 'package:megahackapp/app/shared/constants.dart';
 
 class MainScaffoldScreen extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _MainScaffoldScreenState extends State<MainScaffoldScreen> {
   @override
   Widget build(BuildContext context) {
     List lisPages = [
-          () => HomeScreen(),
+      () => HomeScreen(),
       ()=>BusinessDetailScreen(),
       ()=>ProfileScreen()
     ];
@@ -25,7 +26,11 @@ class _MainScaffoldScreenState extends State<MainScaffoldScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBarMenu(
-
+          firstIcon: Icons.reorder,
+          onPressedFirstIcon: (){},
+          secondIcon: Icons.location_on,
+          onPressedSecondIcon: (){},
+          colorIcons: primaryColor,
         ),
           body: Observer(
               builder:(_){

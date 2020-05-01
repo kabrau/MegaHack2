@@ -10,7 +10,7 @@ class AuthInterceptor extends InterceptorsWrapper{
 //    if (token != null && token.isNotEmpty) {
 //      options.headers.addAll({"Authorization": token});
 //    }
-//    print("REQUEST[${options.method}] => PATH: ${options.path}");
+    print("REQUEST[${options.method}] => PATH: ${options.path}");
     return super.onRequest(options);
   }
 
@@ -22,8 +22,8 @@ class AuthInterceptor extends InterceptorsWrapper{
 
   @override
   onError(DioError err) async {
-//    print(
-//        "RESPONSE[${err.response.statusCode}] => PATH: ${err.response.request.path} => MESSAGE: ${err.response.data}");
+    print(
+        "RESPONSE[${err.response.statusCode}] => PATH: ${err.response.request.path} => MESSAGE: ${err.response.data}");
 //    print(err.response.headers);
 //    if (err.response.statusCode == 403 || err.response.statusCode == 401) {
 //      SharedPrefs.remove('user');
