@@ -12,22 +12,20 @@ router.get('/', function (req, res, next) {
          database: 'aquipertooficial'
     });
 
-    // connection.connect();
-    // connection.query('select * from users', function (error, results, fields) {
-    //     if (error) throw error;
+    connection.connect();
+    
+    connection.query('select * from users', function (error, results, fields) {
+         if (error) throw error;
 
     //     console.log('The solution is: ', results[0]);
     //     console.log('The solution is: ', fields);
 
-    //     res.send(results);
-
-
-    //   });
+         res.send(results);
+    });
        
-    //   connection.end();
+    connection.end();
 
-    res.send("oioioi");
-
+    //res.send("oioioi");
 });
 
 module.exports = router;
