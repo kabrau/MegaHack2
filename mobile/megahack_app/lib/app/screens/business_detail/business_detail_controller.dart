@@ -1,6 +1,5 @@
-import 'package:megahackapp/app/models/product_model.dart';
+import 'package:megahackapp/app/models/portfolio_model.dart';
 import 'package:megahackapp/app/screens/business_detail/business_detail_repository.dart';
-import 'package:megahackapp/app/shared/custom_dio/custom_dio.dart';
 import 'package:mobx/mobx.dart';
 
 part 'business_detail_controller.g.dart';
@@ -10,14 +9,12 @@ class BusinessDetailController = _BusinessDetailControllerBase with _$BusinessDe
 abstract class _BusinessDetailControllerBase with Store {
   final repository = BusinessRepository();
 
-  _BusinessDetailControllerBase(){
-    fetchProducts();
-  }
+
   @observable
-  ObservableFuture<List<Product>> listProduct;
+  ObservableFuture<List<Portfolio>> listPortfolio;
 
 
-  fetchProducts(){
-    listProduct = repository.getBalanceOf().asObservable();
+  fetchPortfolios(){
+    listPortfolio = repository.getBalanceOf().asObservable();
   }
 }

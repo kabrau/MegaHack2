@@ -27,7 +27,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   color: blankColor,
                   boxShadow: [
                     BoxShadow(
-                      color: secondaryColor,
+                      color: greyColor,
                       offset: Offset(0.0, 1.0), //(x,y)
                       blurRadius: 6.0,
                     ),
@@ -69,9 +69,9 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Icon(Icons.star, color: this.widget._controller.selectedIndex == 1 ? primaryColor : blackColor, size: 25),
+                              Icon(Icons.search, color: this.widget._controller.selectedIndex == 1 ? primaryColor : blackColor, size: 25),
                               Text(
-                                "Pedidos",
+                                "Procurar",
                                 style: TextStyle(
                                     color: this.widget._controller.selectedIndex == 1 ? primaryColor : blackColor,
                                     fontSize: 8
@@ -86,13 +86,32 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                             this.widget._controller.changePage(2);
                           },
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(Icons.chat, color: this.widget._controller.selectedIndex == 2 ? primaryColor : blackColor, size: 25),
+                              Text(
+                                "Conversa",
+                                style: TextStyle(
+                                    color: this.widget._controller.selectedIndex == 2 ? primaryColor : blackColor,
+                                    fontSize: 8
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        MaterialButton(
+                          minWidth: 30,
+                          onPressed: (){
+                            this.widget._controller.changePage(3);
+                          },
+                          child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Icon(Icons.person, color: this.widget._controller.selectedIndex == 2 ? primaryColor : blackColor, size: 25),
+                              Icon(Icons.person, color: this.widget._controller.selectedIndex == 3 ? primaryColor : blackColor, size: 25),
                               Text("Perfil",
                                 style: TextStyle(
-                                    color: this.widget._controller.selectedIndex == 2 ? primaryColor : blackColor,
+                                    color: this.widget._controller.selectedIndex == 3 ? primaryColor : blackColor,
                                     fontSize: 8
                                 ),),
                             ],

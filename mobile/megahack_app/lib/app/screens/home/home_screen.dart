@@ -7,6 +7,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: blankColor,
+        title: Text("Home", style: TextStyle(color: blackColor),),
+        centerTitle: true,
+      ),
       body: Container(
         child: ListView(
           children: <Widget>[
@@ -17,11 +22,6 @@ class HomeScreen extends StatelessWidget {
                 child: GestureDetector(
                   child: Text("Teste"),
                   onTap: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-
-                            builder: (context) => BusinessDetailScreen()));
                   },
                 ),
               ),
