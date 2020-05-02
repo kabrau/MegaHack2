@@ -2,27 +2,27 @@ import 'package:dio/dio.dart';
 import 'package:megahackapp/app/models/portfolio_model.dart';
 import 'package:megahackapp/app/shared/custom_dio/custom_dio.dart';
 
-class BusinessRepository {
+class HomeRepository {
   final _dio = CustomDio();
 
-  Future<List<Portfolio>> getBalanceOf() async {
-    var response = await _dio.client.get('/api/portfolio/list');
-    List<Portfolio> list = [];
-    try {
-      for(var json in (response.data['resultado'] as List) ){
-        Portfolio portfolio = Portfolio.fromJson(json);
-        list.add(portfolio);
-      }
-      print(list);
-      return list;
-    } on DioError catch (e) {
-      if (e?.response?.data != null) {
-        throw e.response.data;
-      } else {
-        throw ('Falha ao comunicar com o servidor.');
-      }
-    }
-  }
+//  Future<List<Product>> getBalanceOf() async {
+//    var response = await _dio.client.get('/api/products');
+//    List<Product> list = [];
+//    try {
+//      for(var json in (response.data['resultado'] as List) ){
+//        Product product = Product.fromJson(json);
+//        list.add(product);
+//      }
+//      print(list);
+//      return list;
+//    } on DioError catch (e) {
+//      if (e?.response?.data != null) {
+//        throw e.response.data;
+//      } else {
+//        throw ('Falha ao comunicar com o servidor.');
+//      }
+//    }
+//  }
 
 //  Future<List<CashTransaction>> getCashTransaction(String moedaId, String start, String pageSize) async {
 //    var response = await _dio.client.get(

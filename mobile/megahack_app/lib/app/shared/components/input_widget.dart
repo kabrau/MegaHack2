@@ -28,13 +28,13 @@ class InputField extends StatelessWidget {
         decoration: InputDecoration(
           icon: Icon(
               icon,
-              color: secondaryColor,
+              color: greyColor,
               size: 20,
           ),
           border: InputBorder.none,
           hintText: hint,
           hintStyle: TextStyle(
-            color: secondaryColor,
+            color: greyColor,
             fontSize: 15,
           ),
 

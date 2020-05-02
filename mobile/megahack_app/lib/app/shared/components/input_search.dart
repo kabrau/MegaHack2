@@ -33,7 +33,7 @@ class InputSearch extends StatelessWidget {
           border: InputBorder.none,
           hintText: hint,
           hintStyle: TextStyle(
-            color: secondaryColor,
+            color: greyColor,
             fontSize: 15,
           ),
         ),

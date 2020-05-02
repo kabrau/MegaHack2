@@ -47,7 +47,7 @@ class FormContainer extends StatelessWidget {
                 child: Text(
                   "Não tem uma conta? Cadastra-se",
                   style: TextStyle(
-                      color: secondaryColor,
+                      color: greyColor,
                       fontSize: 15
                   ),
                 ),

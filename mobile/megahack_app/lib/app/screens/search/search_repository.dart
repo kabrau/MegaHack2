@@ -1,17 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:megahackapp/app/models/company_model.dart';
 import 'package:megahackapp/app/models/portfolio_model.dart';
 import 'package:megahackapp/app/shared/custom_dio/custom_dio.dart';
 
-class BusinessRepository {
+class SearchRepository {
   final _dio = CustomDio();
 
-  Future<List<Portfolio>> getBalanceOf() async {
-    var response = await _dio.client.get('/api/portfolio/list');
-    List<Portfolio> list = [];
+  Future<List<Company>> getCompany() async {
+    var response = await _dio.client.get('/api/company/list');
+    List<Company> list = [];
     try {
       for(var json in (response.data['resultado'] as List) ){
-        Portfolio portfolio = Portfolio.fromJson(json);
-        list.add(portfolio);
+        Company company = Company.fromJson(json);
+        list.add(company);
       }
       print(list);
       return list;
