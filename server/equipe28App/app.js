@@ -8,7 +8,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
-var apiTest = require('./routes/teste');
+//var apiTest = require('./routes/teste');
 
 var app = express();
 
