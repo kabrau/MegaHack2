@@ -1,16 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var mysql = require('mysql');
+var db = require('../dal/db.json');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-    var mysql = require('mysql');
-    var connection = mysql.createConnection({
-         host: 'equipe28.mysql.database.azure.com',
-         user: 'AdmEqp28@equipe28',
-         password: 'RaulSeixas-0520',
-         database: 'aquipertooficial'
-    });
+    var connection = mysql.createConnection(db[0]);
 
     connection.connect();
     
@@ -25,7 +21,6 @@ router.get('/', function (req, res, next) {
        
     connection.end();
 
-    //res.send("oioioi");
 });
 
 module.exports = router;
