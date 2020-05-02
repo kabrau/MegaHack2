@@ -25,11 +25,11 @@ router.get('/', function (req, res, next) {
         body += '<br>';
     });
 
+    body += 'api/company/[uid]/portfolio';
     body += '<br>';
-    // body += '<br>';
-    // body += 'Commands<br>';
-    // body += '/list';
 
+    body += 'api/publication/feed';
+    body += '<br>';
 
     res.send(body);
 });
@@ -39,114 +39,86 @@ router.get('/', function (req, res, next) {
 tabelas.forEach(e => {
 
     router.get(`/${e.routName}/list`, function (req, res, next) {
-        // fs.readFile(`./assets/${e.tableName}.json`, "utf8", function (err, data) {
-        //     if (err) {
-        //         var response = { status: "falha", resultado: err };
-        //         res.json(response);
-        //     } else {
-        //         var result = JSON.parse(data);
-        //         var response = { status: "sucesso", resultado: result };
-        //         res.json(response);
-        //     }
-        // });
 
         var connection = mysql.createConnection(db[0]);
 
         connection.connect();
 
         connection.query(`select * from ${e.tableName}`, function (error, results, fields) {
-            if (error) throw error;
-   
-            res.send(results);
-       });
-          
-       connection.end();
+            if (error) throw res.json({ status: "falha", resultado: error });
+
+            var response = { status: "sucesso", resultado: results };
+            res.json(response);
+        });
+
+        connection.end();
 
     });
 
 
     router.get(`/${e.routName}/:id`, function (req, res, next) {
-        fs.readFile(`./assets/${e.tableName}.json`, "utf8", function (err, data) {
-            if (err) {
-                var response = { status: "falha", resultado: err };
-                res.json(response);
-            } else {
 
-                var uid = req.params.id;
-                var obj = JSON.parse(data);
+        var uid = req.params.id;
 
-                var result = `Nenhum registro foi encontrado ${uid}`;
-                var status = "erro"
+        var connection = mysql.createConnection(db[0]);
 
-                // obj.forEach(function (el) {
+        connection.connect();
 
-                //     if (el != null) {
-                //         if (el.uid == uid) {
-                //             result = el;
-                //             status ="sucesso"
-                //         }
-                //     }
-                // });
+        connection.query(`select * from ${e.tableName} where uid="${uid}"`, function (error, results, fields) {
+            if (error) throw res.json({ status: "falha", resultado: error });
+            if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
 
-                // var response = { status: status, resultado: result };
-                // res.json(response);
+            res.json({ status: "sucesso", resultado: results });
 
-                var connection = mysql.createConnection(db[0]);
-
-                connection.connect();
-        
-                connection.query(`select * from ${e.tableName} where uid="${uid}"`, function (error, results, fields) {
-                    if (error) throw error;
-           
-                    res.send(results);
-               });
-                  
-               connection.end();
-            }
         });
+
+        connection.end();
+
     });
 
 
+    router.get(`/company/:id/portfolio`, function (req, res, next) {
+        var uid = req.params.id;
+
+        var connection = mysql.createConnection(db[0]);
+
+        connection.connect();
+
+        connection.query(`select * from portfolio where uid_company="${uid}"`, function (error, results, fields) {
+            if (error) throw res.json({ status: "falha", resultado: error });
+            if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
+
+            res.json({ status: "sucesso", resultado: results });
+
+        });
+
+        connection.end();
+    });
+
+
+    router.get(`/publication/feed`, function (req, res, next) {
+        var uid = req.params.id;
+
+        var connection = mysql.createConnection(db[0]);
+
+        connection.connect();
+
+        connection.query(`select p.*, u.url_avatar from publications as p left join users as u on p.uid_user=u.uid`, function (error, results, fields) {
+            if (error) throw res.json({ status: "falha", resultado: error });
+            if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
+
+            res.json({ status: "sucesso", resultado: results });
+
+        });
+
+        connection.end();
+    });
+
+
+
+
+
 });
-
-
-
-
-
-
-// fs.readFile("./assets/products.json", "utf8", function(err, data){
-//     if (err) {
-//       var response = {status: "falha", resultado: err};
-//       res.json(response);
-//     } else {
-//       var obj = JSON.parse(data);
-//       var result = "Nenhum usuário foi encontrado";
-
-//       console.log(obj);
-
-//       result = obj;
-//       // obj.forEach(function(usuario) {
-
-//       //   if (usuario != null) {
-//       //     //if (usuario.usuario_id == req.query.usuario_id) {
-//       //       result = usuario;
-//       //    // }
-//       //   }
-//       // });
-
-//       var response = {status: "sucesso", resultado: result};
-//       res.json(response);
-//     }
-//   });
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;
