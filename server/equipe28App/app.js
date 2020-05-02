@@ -5,10 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
-
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
 var apiTest = require('./routes/test');
+
+var apiUser = require('./routes/user');
+
 
 var app = express();
 
@@ -22,9 +24,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.use(function(req, res, next){
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.setHeader('Access-Control-Allow-Headers', 'content-type');
+//   res.setHeader('Content-Type', 'application/json');
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   next();
+//  });
+
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 app.use('/test', apiTest);
+
+app.use('/api/user', apiUser);
 
 
 

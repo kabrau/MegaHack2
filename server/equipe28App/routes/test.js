@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var db = require('../dal/db.json');
+var dbConfig = require('../config/config.json')["db"];
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-    var connection = mysql.createConnection(db[0]);
+    var connection = mysql.createConnection(dbConfig);
 
     connection.connect();
     

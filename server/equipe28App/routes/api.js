@@ -2,10 +2,16 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var mysql = require('mysql');
-var db = require('../dal/db.json');
+var dbConfig = require('../config/config.json')["db"];
+
+// var users = require('./user');
+// router.route('/users')
+//       .post(validate, user.createUser);
+
+//{ routName: "user", tableName: "users" },
 
 tabelas = [
-    { routName: "user", tableName: "users" },
+    
     { routName: "comment", tableName: "comments" },
     { routName: "company", tableName: "companies" },
     { routName: "portfolio", tableName: "portfolio" },
@@ -40,7 +46,7 @@ tabelas.forEach(e => {
 
     router.get(`/${e.routName}/list`, function (req, res, next) {
 
-        var connection = mysql.createConnection(db[0]);
+        var connection = mysql.createConnection(dbConfig);
 
         connection.connect();
 
@@ -60,7 +66,7 @@ tabelas.forEach(e => {
 
         var uid = req.params.id;
 
-        var connection = mysql.createConnection(db[0]);
+        var connection = mysql.createConnection(dbConfig);
 
         connection.connect();
 
@@ -80,7 +86,7 @@ tabelas.forEach(e => {
     router.get(`/company/:id/portfolio`, function (req, res, next) {
         var uid = req.params.id;
 
-        var connection = mysql.createConnection(db[0]);
+        var connection = mysql.createConnection(dbConfig);
 
         connection.connect();
 
@@ -99,7 +105,7 @@ tabelas.forEach(e => {
     router.get(`/publication/feed`, function (req, res, next) {
         var uid = req.params.id;
 
-        var connection = mysql.createConnection(db[0]);
+        var connection = mysql.createConnection(dbConfig);
 
         connection.connect();
 
