@@ -8,8 +8,8 @@ import 'package:megahackapp/app/shared/constants.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class BusinessDetailScreen extends StatelessWidget {
-  final Company company;
-  BusinessDetailScreen(this.company);
+//  final Company company;
+//  BusinessDetailScreen(this.company);
 
   final controller = BusinessDetailController();
 
@@ -26,7 +26,7 @@ class BusinessDetailScreen extends StatelessWidget {
     controller.fetchPortfolios();
     return Scaffold(
       appBar: AppBar(
-        title: Text("${company.name}"),
+        title: Text("teste")
       ),
       body: Container(
         child: ListView(

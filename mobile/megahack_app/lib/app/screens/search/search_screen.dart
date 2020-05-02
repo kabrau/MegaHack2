@@ -12,8 +12,14 @@ class _SearchScreenState extends State<SearchScreen> {
   final controller = SearchController();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
     controller.fecthCompany();
+
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: blankColor,
@@ -60,7 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 onTap: (){
                                   Navigator.push(context, MaterialPageRoute(
 
-                                      builder: (context) => BusinessDetailScreen(list[index])));
+                                      builder: (context) => BusinessDetailScreen()));
                                 },
                                 child: Container(
                                     margin: EdgeInsets.all(10),
@@ -118,7 +124,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 onTap: (){
                                   Navigator.push(context, MaterialPageRoute(
 
-                                      builder: (context) => BusinessDetailScreen(list[index])));
+                                      builder: (context) => BusinessDetailScreen()));
                                 },
                                 child: Container(
                                     margin: EdgeInsets.all(10),
