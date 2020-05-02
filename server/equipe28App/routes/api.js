@@ -20,6 +20,8 @@ router.get('/', function (req, res, next) {
 
     tabelas.forEach(e => {
         body += `api/${e.routName}/list<br>`
+        body += `api/${e.routName}/[uid]<br>`
+        body += '<br>';
     });
 
     body += '<br>';
@@ -36,7 +38,6 @@ router.get('/', function (req, res, next) {
 tabelas.forEach(e => {
 
     router.get(`/${e.routName}/list`, function (req, res, next) {
-
         fs.readFile(`./assets/${e.tableName}.json`, "utf8", function (err, data) {
             if (err) {
                 var response = { status: "falha", resultado: err };
@@ -47,11 +48,41 @@ tabelas.forEach(e => {
                 res.json(response);
             }
         });
-
     });
 
+
+    router.get(`/${e.routName}/:id`, function (req, res, next) {
+        fs.readFile(`./assets/${e.tableName}.json`, "utf8", function (err, data) {
+            if (err) {
+                var response = { status: "falha", resultado: err };
+                res.json(response);
+            } else {
+
+                var uid = req.params.id;
+                var obj = JSON.parse(data);
+
+                var result = `Nenhum registro foi encontrado ${uid}`;
+                var status = "erro"
+
+                obj.forEach(function (el) {
+
+                    if (el != null) {
+                        if (el.uid == uid) {
+                            result = el;
+                            status ="sucesso"
+                        }
+                    }
+                });
+
+                var response = { status: status, resultado: result };
+                res.json(response);
+            }
+        });
+    });
+
+
 });
- 
+
 
 
 
@@ -66,7 +97,7 @@ tabelas.forEach(e => {
 //       var result = "Nenhum usuário foi encontrado";
 
 //       console.log(obj);
-  
+
 //       result = obj;
 //       // obj.forEach(function(usuario) {
 
@@ -76,7 +107,7 @@ tabelas.forEach(e => {
 //       //    // }
 //       //   }
 //       // });
-  
+
 //       var response = {status: "sucesso", resultado: result};
 //       res.json(response);
 //     }
