@@ -15,6 +15,6 @@ abstract class _BusinessDetailControllerBase with Store {
 
 
   fetchPortfolios(){
-    listPortfolio = repository.getBalanceOf().asObservable();
+    listPortfolio = repository.getPortfolio().asObservable();
   }
 }

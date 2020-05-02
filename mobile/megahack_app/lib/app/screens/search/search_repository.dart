@@ -10,9 +10,10 @@ class SearchRepository {
     var response = await _dio.client.get('/api/company/list');
     List<Company> list = [];
     try {
-      for(var json in (response.data['resultado'] as List) ){
+      for(var json in (response.data["resultado"] as List) ){
         Company company = Company.fromJson(json);
         list.add(company);
+        print(company);
       }
       print(list);
       return list;
