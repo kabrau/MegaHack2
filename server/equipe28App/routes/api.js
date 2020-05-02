@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-
+var mysql = require('mysql');
+var db = require('../dal/db.json');
 
 tabelas = [
     { routName: "user", tableName: "users" },
@@ -38,16 +39,29 @@ router.get('/', function (req, res, next) {
 tabelas.forEach(e => {
 
     router.get(`/${e.routName}/list`, function (req, res, next) {
-        fs.readFile(`./assets/${e.tableName}.json`, "utf8", function (err, data) {
-            if (err) {
-                var response = { status: "falha", resultado: err };
-                res.json(response);
-            } else {
-                var result = JSON.parse(data);
-                var response = { status: "sucesso", resultado: result };
-                res.json(response);
-            }
-        });
+        // fs.readFile(`./assets/${e.tableName}.json`, "utf8", function (err, data) {
+        //     if (err) {
+        //         var response = { status: "falha", resultado: err };
+        //         res.json(response);
+        //     } else {
+        //         var result = JSON.parse(data);
+        //         var response = { status: "sucesso", resultado: result };
+        //         res.json(response);
+        //     }
+        // });
+
+        var connection = mysql.createConnection(db[0]);
+
+        connection.connect();
+
+        connection.query(`select * from ${e.tableName}`, function (error, results, fields) {
+            if (error) throw error;
+   
+            res.send(results);
+       });
+          
+       connection.end();
+
     });
 
 
@@ -64,18 +78,30 @@ tabelas.forEach(e => {
                 var result = `Nenhum registro foi encontrado ${uid}`;
                 var status = "erro"
 
-                obj.forEach(function (el) {
+                // obj.forEach(function (el) {
 
-                    if (el != null) {
-                        if (el.uid == uid) {
-                            result = el;
-                            status ="sucesso"
-                        }
-                    }
-                });
+                //     if (el != null) {
+                //         if (el.uid == uid) {
+                //             result = el;
+                //             status ="sucesso"
+                //         }
+                //     }
+                // });
 
-                var response = { status: status, resultado: result };
-                res.json(response);
+                // var response = { status: status, resultado: result };
+                // res.json(response);
+
+                var connection = mysql.createConnection(db[0]);
+
+                connection.connect();
+        
+                connection.query(`select * from ${e.tableName} where uid="${uid}"`, function (error, results, fields) {
+                    if (error) throw error;
+           
+                    res.send(results);
+               });
+                  
+               connection.end();
             }
         });
     });
