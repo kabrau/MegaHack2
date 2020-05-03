@@ -19,17 +19,28 @@ class ButtonWidget extends StatelessWidget {
           height: height,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.all(Radius.circular(5.0))
-          ),
-          child: Text(
+              gradient: LinearGradient(
+                colors: [terciaryColor, primaryColor],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.black87,
+                  offset: Offset(0, 2),
+                  blurRadius: 10.0,
+                ),
+              ],
+              borderRadius: BorderRadius.all(Radius.circular(50))),
+          child: Center(
+              child: Text(
             "ENTRAR",
             style: TextStyle(
-                color: blackColor,
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.3
-            ),
+                color: blankColor,
+                fontSize: 18,
+                fontFamily: "AvenirLTStd Black",
+                letterSpacing: 0.3),
+          ),
           ),
         ),
       ),

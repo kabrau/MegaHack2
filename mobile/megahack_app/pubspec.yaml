@@ -14,9 +14,10 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
+  google_maps_flutter:
   transparent_image:
   shimmer:
   dio: ^3.0.9
@@ -47,6 +48,26 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: AvenirLTStd Black
+      fonts:
+          - asset: assets/fonts/AvenirLTStd-Black.otf
+            weight: 900
+    - family: AvenirLTStd Light
+      fonts:
+          - asset: assets/fonts/AvenirLTStd-Light.otf
+            weight: 300
+    - family: AvenirLTStd Medium
+      fonts:
+          - asset: assets/fonts/AvenirLTStd-Medium.otf
+            weight: 500
+    - family: AvenirLTStd Roman
+      fonts:
+          - asset: assets/fonts/AvenirLTStd-Roman.otf
+            weight: 400
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

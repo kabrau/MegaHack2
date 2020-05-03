@@ -13,29 +13,25 @@ class InputField extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(
-                color: primaryColor,
-                width: 1.0,
-              )
-          )
+          color: greyColor,
+          borderRadius: BorderRadius.all(Radius.circular(40))
       ),
       child: TextFormField(
         obscureText: obscure,
         style: TextStyle(
-          color: blackColor,
+          color: primaryColor,
         ),
         decoration: InputDecoration(
-          icon: Icon(
-              icon,
-              color: greyColor,
-              size: 20,
+          prefixIcon: Icon(
+            icon,
+            color: primaryColor,
+            size: 24,
           ),
           border: InputBorder.none,
           hintText: hint,
           hintStyle: TextStyle(
-            color: greyColor,
-            fontSize: 15,
+            color: primaryColor,
+            fontSize: 14,
           ),
 
         ),

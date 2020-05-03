@@ -5,22 +5,22 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          child: ListView(
-            children: <Widget>[
-              Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height/3,
-                    child: Icon(Icons.done, size: 200,),
+                    margin: EdgeInsets.only(top: 70),
+                    child: Image.asset("assets/images/logo_screen.png", height: 131, width: 133,),
                   ),
                   FormContainer(),
                 ],
               ),
-            ],
-          )
-      ),
+            )
+        ),
+      )
     );
   }
 }

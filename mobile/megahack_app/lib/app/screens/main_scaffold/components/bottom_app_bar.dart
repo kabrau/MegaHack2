@@ -88,7 +88,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Icon(Icons.chat, color: this.widget._controller.selectedIndex == 2 ? primaryColor : blackColor, size: 25),
+                              Icon(Icons.chat_bubble, color: this.widget._controller.selectedIndex == 2 ? primaryColor : blackColor, size: 25),
                               Text(
                                 "Conversa",
                                 style: TextStyle(

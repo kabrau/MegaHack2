@@ -14,7 +14,7 @@ abstract class _BusinessDetailControllerBase with Store {
   ObservableFuture<List<Portfolio>> listPortfolio;
 
 
-  fetchPortfolios(){
-    listPortfolio = repository.getPortfolio().asObservable();
+  fetchPortfolios(String companyId){
+    listPortfolio = repository.getPortfolio(companyId).asObservable();
   }
 }
