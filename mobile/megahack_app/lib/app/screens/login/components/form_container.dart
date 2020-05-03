@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:megahackapp/app/screens/login/login_controller.dart';
 import 'package:megahackapp/app/screens/main_scaffold/main_scaffold_screen.dart';
 import 'package:megahackapp/app/screens/register/register_screen.dart';
 import 'package:megahackapp/app/shared/components/button_widget.dart';
@@ -6,6 +8,9 @@ import 'package:megahackapp/app/shared/components/input_widget.dart';
 import 'package:megahackapp/app/shared/constants.dart';
 
 class FormContainer extends StatelessWidget {
+  final LoginController controller;
+  FormContainer(this.controller);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,11 +24,13 @@ class FormContainer extends StatelessWidget {
                   hint: "Digite seu usuário",
                   obscure: false,
                   icon: Icons.account_circle,
+                  onChanged: controller.changeLogin,
                 ),
                 InputField(
                   hint: "Digite sua senha",
                   obscure: true,
                   icon: Icons.lock_outline,
+                  onChanged: controller.changePassword,
                 ),
                 Padding(
                   padding: EdgeInsets.all(18),
@@ -40,18 +47,24 @@ class FormContainer extends StatelessWidget {
                 )
               ],
             ),
-            ButtonWidget(
-              onTap: (){
-                Navigator.pushAndRemoveUntil(context,
-                    MaterialPageRoute(
-                        builder: (context) => MainScaffoldScreen()
-                    ),
-                        (Route<dynamic> route) => false
-                );
-              },
-              height: 51,
-              width: 288,
-            ),
+           Observer(
+             builder: (_){
+               return  ButtonWidget(
+                 width: 288,
+                 height: 51,
+                 value: Text("ENTRAR"),
+                 isValid: controller.isValid,
+                 onTap: (){
+                   Navigator.pushAndRemoveUntil(context,
+                       MaterialPageRoute(
+                           builder: (context) => MainScaffoldScreen()
+                       ),
+                           (Route<dynamic> route) => false
+                   );
+                 },
+               );
+             }
+           ),
             SizedBox(
               height: 62,
             ),

@@ -23,8 +23,12 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: blankColor,
-        title: Text("Procurar", style: TextStyle(color: blackColor),),
+        title: Text("Procurar", style: TextStyle(color: primaryColor, fontFamily: "AvenirLTStd Roman",
+            fontSize: 22),),
         centerTitle: true,
+        iconTheme: IconThemeData(
+          color: primaryColor
+        ),
       ),
       body: Container(
         child: ListView(
@@ -32,12 +36,15 @@ class _SearchScreenState extends State<SearchScreen> {
             Container(
               margin: EdgeInsets.only(top: 20, left: 20, right: 20),
               padding: EdgeInsets.all(10),
-              color: grey2Color,
+              decoration: BoxDecoration(
+                  color: greyColor,
+                  borderRadius: BorderRadius.all(Radius.circular(40))
+              ),
               width: MediaQuery.of(context).size.width,
               child: Row(
                 children: <Widget>[
-                  Icon(Icons.search),
-                  Text("Serviço procurado")
+                  Icon(Icons.search, color: primaryColor, size: 24),
+                  Text(" Procurar ")
                 ],
               ),
             ),
