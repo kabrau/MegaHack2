@@ -44,81 +44,81 @@ router.get('/', function (req, res, next) {
 
 tabelas.forEach(e => {
 
-    router.get(`/${e.routName}/list`, function (req, res, next) {
+    // router.get(`/${e.routName}/list`, function (req, res, next) {
 
-        var connection = mysql.createConnection(dbConfig);
+    //     var connection = mysql.createConnection(dbConfig);
 
-        connection.connect();
+    //     connection.connect();
 
-        connection.query(`select * from ${e.tableName}`, function (error, results, fields) {
-            if (error) throw res.json({ status: "falha", resultado: error });
+    //     connection.query(`select * from ${e.tableName}`, function (error, results, fields) {
+    //         if (error) throw res.json({ status: "falha", resultado: error });
 
-            var response = { status: "sucesso", resultado: results };
-            res.json(response);
-        });
+    //         var response = { status: "sucesso", resultado: results };
+    //         res.json(response);
+    //     });
 
-        connection.end();
+    //     connection.end();
 
-    });
-
-
-    router.get(`/${e.routName}/:id`, function (req, res, next) {
-
-        var uid = req.params.id;
-
-        var connection = mysql.createConnection(dbConfig);
-
-        connection.connect();
-
-        connection.query(`select * from ${e.tableName} where uid="${uid}"`, function (error, results, fields) {
-            if (error) throw res.json({ status: "falha", resultado: error });
-            if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
-
-            res.json({ status: "sucesso", resultado: results });
-
-        });
-
-        connection.end();
-
-    });
+    // });
 
 
-    router.get(`/company/:id/portfolio`, function (req, res, next) {
-        var uid = req.params.id;
+    // router.get(`/${e.routName}/:id`, function (req, res, next) {
 
-        var connection = mysql.createConnection(dbConfig);
+    //     var uid = req.params.id;
 
-        connection.connect();
+    //     var connection = mysql.createConnection(dbConfig);
 
-        connection.query(`select * from portfolio where uid_company="${uid}"`, function (error, results, fields) {
-            if (error) throw res.json({ status: "falha", resultado: error });
-            if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
+    //     connection.connect();
 
-            res.json({ status: "sucesso", resultado: results });
+    //     connection.query(`select * from ${e.tableName} where uid="${uid}"`, function (error, results, fields) {
+    //         if (error) throw res.json({ status: "falha", resultado: error });
+    //         if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
 
-        });
+    //         res.json({ status: "sucesso", resultado: results });
 
-        connection.end();
-    });
+    //     });
+
+    //     connection.end();
+
+    // });
 
 
-    router.get(`/publication/feed`, function (req, res, next) {
-        var uid = req.params.id;
+    // router.get(`/company/:id/portfolio`, function (req, res, next) {
+    //     var uid = req.params.id;
 
-        var connection = mysql.createConnection(dbConfig);
+    //     var connection = mysql.createConnection(dbConfig);
 
-        connection.connect();
+    //     connection.connect();
 
-        connection.query(`select p.*, u.url_avatar from publications as p left join users as u on p.uid_user=u.uid`, function (error, results, fields) {
-            if (error) throw res.json({ status: "falha", resultado: error });
-            if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
+    //     connection.query(`select * from portfolio where uid_company="${uid}"`, function (error, results, fields) {
+    //         if (error) throw res.json({ status: "falha", resultado: error });
+    //         if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
 
-            res.json({ status: "sucesso", resultado: results });
+    //         res.json({ status: "sucesso", resultado: results });
 
-        });
+    //     });
 
-        connection.end();
-    });
+    //     connection.end();
+    // });
+
+
+    // router.get(`/publication/feed`, function (req, res, next) {
+    //     var uid = req.params.id;
+
+    //     var connection = mysql.createConnection(dbConfig);
+
+    //     connection.connect();
+
+    //     connection.query(`select p.*, u.url_avatar from publications as p left join users as u on p.uid_user=u.uid`, function (error, results, fields) {
+    //         if (error) throw res.json({ status: "falha", resultado: error });
+    //         if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
+
+    //         res.json({ status: "sucesso", resultado: results });
+
+    //     });
+
+    //     connection.end();
+    // });
 
 
 

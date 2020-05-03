@@ -5,13 +5,13 @@ var dbConfig = require('../config/config.json')["db"];
 
 var DbModel = require('../model/model');
 
-var tableName = "users"
+var tableName = "companies"
 
 var connection = mysql.createPool(dbConfig);
  
 var myDbModel = new DbModel(tableName, connection)
 
-/* GET API list */
+
 router.get('/list', function (req, res, next) {
 
     myDbModel.dbGetList()
@@ -58,6 +58,17 @@ router.get('/:id', function (req, res, next) {
         .catch((err) => { res.json({ status: "falha", resultado: err }); })
 
 })
+
+router.get(`/:id/portfolio`, function (req, res, next) {
+    var uid = req.params.id;
+
+    var myDbModelPortfolio = new DbModel("portfolio", connection)
+
+    myDbModelPortfolio.dbGetList({"uid_company":uid})
+    .then((result) => { res.json({ status: "sucesso", resultado: result }); })
+    .catch((err) => { res.json({ status: "falha", resultado: err }); })
+
+});
 
 
 module.exports = router;
