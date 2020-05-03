@@ -7,8 +7,14 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');
+
 var apiTest = require('./routes/test');
 
+var apiCategory = require('./routes/category');
+var apiComment = require('./routes/comment');
+var apiCompany = require('./routes/company');
+var apiPortfolio = require('./routes/portfolio');
+var apiPublication = require('./routes/publication');
 var apiUser = require('./routes/user');
 
 
@@ -34,11 +40,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 //  });
 
 app.use('/', indexRouter);
-app.use('/api', apiRouter);
 app.use('/test', apiTest);
 
+//app.use('/api', apiRouter);
+app.use('/api/category', apiCategory);
+app.use('/api/comment', apiComment);
+app.use('/api/company', apiCompany);
+app.use('/api/portfolio', apiPortfolio);
+app.use('/api/publication', apiPublication);
 app.use('/api/user', apiUser);
-
 
 
 // catch 404 and forward to error handler

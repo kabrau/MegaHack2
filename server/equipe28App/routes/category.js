@@ -5,7 +5,7 @@ var dbConfig = require('../config/config.json')["db"];
 
 var DbModel = require('../model/model');
 
-var tableName = "users"
+var tableName = "categories"
 
 var connection = mysql.createPool(dbConfig);
  

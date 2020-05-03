@@ -1,0 +1,54 @@
+{
+	"table": "COLUMNS",
+	"rows":
+	[
+		{
+			"Field": "uid",
+			"Type": "char(36)",
+			"Null": "NO",
+			"Key": "PRI",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "name",
+			"Type": "varchar(150)",
+			"Null": "NO",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "nickname",
+			"Type": "varchar(50)",
+			"Null": "NO",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "url_avatar",
+			"Type": "char(36)",
+			"Null": "NO",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "uid_user",
+			"Type": "char(36)",
+			"Null": "NO",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "lastupdate_date",
+			"Type": "timestamp",
+			"Null": "NO",
+			"Key": "",
+			"Default": "CURRENT_TIMESTAMP",
+			"Extra": "on update CURRENT_TIMESTAMP"
+		}
+	]
+}

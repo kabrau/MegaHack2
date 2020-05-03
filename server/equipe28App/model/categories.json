@@ -1,0 +1,38 @@
+{
+	"table": "COLUMNS",
+	"rows":
+	[
+		{
+			"Field": "uid",
+			"Type": "char(36)",
+			"Null": "NO",
+			"Key": "PRI",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "description",
+			"Type": "varchar(200)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "lastupdate_date",
+			"Type": "timestamp",
+			"Null": "YES",
+			"Key": "",
+			"Default": "CURRENT_TIMESTAMP",
+			"Extra": "on update CURRENT_TIMESTAMP"
+		},
+		{
+			"Field": "lastupdate_uid_user",
+			"Type": "char(36)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		}
+	]
+}

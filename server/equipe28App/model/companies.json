@@ -1,0 +1,126 @@
+{
+	"table": "COLUMNS",
+	"rows":
+	[
+		{
+			"Field": "uid",
+			"Type": "char(36)",
+			"Null": "NO",
+			"Key": "PRI",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "name",
+			"Type": "varchar(200)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "CNPJ",
+			"Type": "varchar(23)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "CEP",
+			"Type": "varchar(9)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "uid_category",
+			"Type": "char(36)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "url_logo",
+			"Type": "varchar(150)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "fone_contact",
+			"Type": "varchar(150)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "adm_uid_user",
+			"Type": "char(36)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "adress",
+			"Type": "varchar(250)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "adress_number",
+			"Type": "varchar(15)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "adress_complement",
+			"Type": "varchar(50)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "city",
+			"Type": "varchar(200)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "state",
+			"Type": "char(2)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "lastupdate_date",
+			"Type": "timestamp",
+			"Null": "YES",
+			"Key": "",
+			"Default": "CURRENT_TIMESTAMP",
+			"Extra": "on update CURRENT_TIMESTAMP"
+		},
+		{
+			"Field": "lastupdate_uid_user",
+			"Type": "char(36)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		}
+	]
+}
