@@ -9,74 +9,105 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
- final controller = ProfileController();
+  final controller = ProfileController();
 
   @override
   Widget build(BuildContext context) {
     controller.getCurrentUser();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: blankColor,
-        title: Text("Perfil", style: TextStyle(color: blackColor),),
-        centerTitle: true,
-      ),
-      body: Container(
-        child: Observer(
-          builder: (_){
-            if(controller.user != null && controller.user.value != null){
+        body: Container(
+            child: ListView(
+      children: <Widget>[
+        Observer(builder: (_) {
+          if (controller.user != null && controller.user.value != null) {
             var user = controller.user.value;
-            return ListView(
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: user.urlAvatar != null ?
-                              NetworkImage("http://equipe28.azurewebsites.net/images/${user.urlAvatar}") :
-                              AssetImage("assets/images/person_avatar.png"),
-                              fit: BoxFit.cover
-                          )),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(user.name ?? "",
-                              style: TextStyle(
-                                  fontSize: 18, color: blackColor,
-                                  fontWeight: FontWeight.w700)),
-                          Text(user.lastupdateDate ?? "",
-                              style: TextStyle(
-                                  fontSize: 18, color: blackColor))
-                        ],
-                      ),
-                    ),
-                    Card(
-                      child: Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(
-                          child: Text("Gerenciar Conta"),
-                        ),
-                      ),
-                    )
-                  ],
-                )
+                Container(
+                  width: 109.0,
+                  height: 109.0,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: user.urlAvatar != null
+                              ? NetworkImage(
+                                  "http://equipe28.azurewebsites.net/images/${user.urlAvatar}")
+                              : AssetImage("assets/images/person_avatar.png"),
+                          fit: BoxFit.cover)),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(17),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(user.name ?? "",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: blackColor,
+                              fontWeight: FontWeight.w700)),
+                      Text(user.lastupdateDate ?? "",
+                          style: TextStyle(fontSize: 18, color: blackColor))
+                    ],
+                  ),
+                ),
               ],
             );
-            }
-            return Center(
+          }
+          return Container(
+            height: 185,
+            child: Center(
               child: CircularProgressIndicator(),
-            );
-          },
-        )
-      ),
-    );
+            ),
+          );
+        }),
+        Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              children: <Widget>[
+                cardWidget(
+                    Icons.add_circle, primaryColor, "Gerenciar minha conta"),
+                cardWidget(
+                    Icons.settings, primaryColor, "Gerenciar minha conta"),
+                cardWidget(Icons.exit_to_app, Color(0xffBD1E1E),
+                    "Gerenciar minha conta"),
+              ],
+            ))
+      ],
+    )));
+  }
+
+  Card cardWidget(IconData icon, color, text) {
+    return Card(
+        margin: EdgeInsets.only(bottom: 15),
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(18))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              child: Row(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        icon,
+                        color: color,
+                        size: 30,
+                      ),
+                      Text("  $text",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: blackColor,
+                              fontFamily: "AvenirLTStd Light")),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }

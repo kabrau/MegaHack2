@@ -5,8 +5,9 @@ class InputField extends StatelessWidget {
   final String hint;
   final bool obscure;
   final IconData icon;
+  final Function(String) onChanged;
 
-  InputField({this.hint, this.obscure, this.icon});
+  InputField({this.hint, this.obscure, this.icon, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class InputField extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(40))
       ),
       child: TextFormField(
+        onChanged: onChanged,
         obscureText: obscure,
         style: TextStyle(
           color: primaryColor,
@@ -33,7 +35,6 @@ class InputField extends StatelessWidget {
             color: primaryColor,
             fontSize: 14,
           ),
-
         ),
       ),
     );

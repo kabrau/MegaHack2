@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:megahackapp/app/screens/login/components/form_container.dart';
+import 'package:megahackapp/app/screens/register/components/form_container.dart';
+import 'package:megahackapp/app/screens/register/register_controller.dart';
 import 'package:megahackapp/app/shared/constants.dart';
 
 class RegisterScreen extends StatelessWidget {
+  final controller = RegisterController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class RegisterScreen extends StatelessWidget {
       body: Container(
         child: ListView(
           children: <Widget>[
-            FormContainer()
+            FormContainer(controller)
           ],
         ),
       ),
