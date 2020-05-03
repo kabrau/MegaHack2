@@ -27,6 +27,14 @@
 			"Extra": ""
 		},
 		{
+			"Field": "request",
+			"Type": "tinyint(4)",
+			"Null": "YES",
+			"Key": "",
+			"Default": "0",
+			"Extra": ""
+		},
+		{
 			"Field": "uid_user",
 			"Type": "char(36)",
 			"Null": "YES",

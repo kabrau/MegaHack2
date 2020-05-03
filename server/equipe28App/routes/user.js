@@ -15,7 +15,7 @@ var myDbModel = new DbModel(tableName, connection)
 router.get(`/:id/feed`, function (req, res, next) {
     var uid = req.params.id;
 
-    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where p.uid_user=?`,[uid], function (error, results, fields) {
+    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=0 and p.uid_user=?`,[uid], function (error, results, fields) {
         if (error) throw res.json({ status: "falha", resultado: error });
         if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
 
@@ -25,6 +25,18 @@ router.get(`/:id/feed`, function (req, res, next) {
 
 });
 
+router.get(`/:id/request`, function (req, res, next) {
+    var uid = req.params.id;
+
+    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=1 and p.uid_user=?`,[uid], function (error, results, fields) {
+        if (error) throw res.json({ status: "falha", resultado: error });
+        if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
+
+        res.json({ status: "sucesso", resultado: results });
+
+    });
+
+});
 
 
 router.get('/list', function (req, res, next) {

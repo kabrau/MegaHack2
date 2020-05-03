@@ -14,7 +14,7 @@ var myDbModel = new DbModel(tableName, connection)
 
 router.get(`/feed`, function (req, res, next) {
 
-    connection.query(`select p.*, u.url_avatar, u.name as name_user from ${tableName} as p left join users as u on p.uid_user=u.uid`, function (error, results, fields) {
+    connection.query(`select p.*, u.url_avatar, u.name as name_user from ${tableName} as p left join users as u on p.uid_user=u.uid where request=0`, function (error, results, fields) {
         if (error) throw res.json({ status: "falha", resultado: error });
         if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado` });
 
@@ -23,6 +23,20 @@ router.get(`/feed`, function (req, res, next) {
     });
 
 });
+
+
+router.get(`/request`, function (req, res, next) {
+
+    connection.query(`select p.*, u.url_avatar, u.name as name_user from ${tableName} as p left join users as u on p.uid_user=u.uid where request=1`, function (error, results, fields) {
+        if (error) throw res.json({ status: "falha", resultado: error });
+        if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado` });
+
+        res.json({ status: "sucesso", resultado: results });
+
+    });
+
+});
+
 
 
 router.get('/list', function (req, res, next) {

@@ -27,6 +27,22 @@
 			"Extra": ""
 		},
 		{
+			"Field": "email",
+			"Type": "varchar(150)",
+			"Null": "NO",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "password",
+			"Type": "varchar(150)",
+			"Null": "NO",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
 			"Field": "url_avatar",
 			"Type": "char(36)",
 			"Null": "NO",
