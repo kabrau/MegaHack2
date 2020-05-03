@@ -8,14 +8,14 @@ var DbModel = require('../model/model');
 var tableName = "users"
 
 var connection = mysql.createPool(dbConfig);
- 
+
 var myDbModel = new DbModel(tableName, connection)
 
 
 router.get(`/:id/feed`, function (req, res, next) {
     var uid = req.params.id;
 
-    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=0 and p.uid_user=?`,[uid], function (error, results, fields) {
+    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=0 and p.uid_user=?`, [uid], function (error, results, fields) {
         if (error) throw res.json({ status: "falha", resultado: error });
         if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
 
@@ -28,7 +28,7 @@ router.get(`/:id/feed`, function (req, res, next) {
 router.get(`/:id/request`, function (req, res, next) {
     var uid = req.params.id;
 
-    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=1 and p.uid_user=?`,[uid], function (error, results, fields) {
+    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=1 and p.uid_user=?`, [uid], function (error, results, fields) {
         if (error) throw res.json({ status: "falha", resultado: error });
         if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
 
@@ -80,8 +80,30 @@ router.get('/:id', function (req, res, next) {
 
     var uid = req.params.id;
 
-    myDbModel.dbGetList({"uid":uid})
+    myDbModel.dbGetList({ "uid": uid })
         .then((result) => { res.json({ status: "sucesso", resultado: result }); })
+        .catch((err) => { res.json({ status: "falha", resultado: err }); })
+
+})
+
+router.get('/login/:loginName', function (req, res, next) {
+
+    var loginName = req.params.loginName;
+
+    myDbModel.dbGetList({ "nickname": loginName })
+        .then((result) => {
+            if (result.length > 0)
+                res.json({ status: "sucesso", resultado: result[0] });
+            else
+                myDbModel.dbGetList({ "email": loginName })
+                    .then((result) => {
+                        if (result.length > 0)
+                            res.json({ status: "sucesso", resultado: result[0] });
+                        else
+                            res.json({ status: "falha", resultado: "usuário não encontrado" });
+                    })
+                    .catch((err) => { res.json({ status: "falha", resultado: err }); })
+        })
         .catch((err) => { res.json({ status: "falha", resultado: err }); })
 
 })

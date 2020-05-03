@@ -19,6 +19,14 @@
 			"Extra": ""
 		},
 		{
+			"Field": "uid_category",
+			"Type": "char(36)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
 			"Field": "url_image",
 			"Type": "text",
 			"Null": "YES",
