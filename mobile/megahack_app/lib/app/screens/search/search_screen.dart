@@ -66,7 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 onTap: (){
                                   Navigator.push(context, MaterialPageRoute(
 
-                                      builder: (context) => BusinessDetailScreen()));
+                                      builder: (context) => BusinessDetailScreen(list[index])));
                                 },
                                 child: Container(
                                     margin: EdgeInsets.all(10),
@@ -124,7 +124,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 onTap: (){
                                   Navigator.push(context, MaterialPageRoute(
 
-                                      builder: (context) => BusinessDetailScreen()));
+                                      builder: (context) => BusinessDetailScreen(list[index])));
                                 },
                                 child: Container(
                                     margin: EdgeInsets.all(10),

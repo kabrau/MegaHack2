@@ -5,11 +5,11 @@ import 'package:megahackapp/app/shared/custom_dio/custom_dio.dart';
 class BusinessRepository {
   final _dio = CustomDio();
 
-  Future<List<Portfolio>> getPortfolio() async {
-    var response = await _dio.client.get('/api/portfolio/list');
+  Future<List<Portfolio>> getPortfolio(String companyId) async {
+    var response = await _dio.client.get('/api/company/$companyId/portfolio');
     List<Portfolio> list = [];
     try {
-      for(var json in (response.data as List) ){
+      for(var json in (response.data["resultado"] as List) ){
         Portfolio portfolio = Portfolio.fromJson(json);
         list.add(portfolio);
       }

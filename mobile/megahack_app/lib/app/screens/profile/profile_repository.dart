@@ -4,22 +4,21 @@ import 'package:megahackapp/app/models/publication_model.dart';
 import 'package:megahackapp/app/models/publication_model.dart';
 import 'package:megahackapp/app/models/publication_model.dart';
 import 'package:megahackapp/app/models/publication_model.dart';
+import 'package:megahackapp/app/models/user_model.dart';
+import 'package:megahackapp/app/models/user_model.dart';
+import 'package:megahackapp/app/models/user_model.dart';
+import 'package:megahackapp/app/models/user_model.dart';
 import 'package:megahackapp/app/shared/custom_dio/custom_dio.dart';
 
-class HomeRepository {
+class ProfileRepository {
   final _dio = CustomDio();
 
-  Future<List<Publication>> getFeed() async {
-    var response = await _dio.client.get('/api/publication/feed');
-    List<Publication> list = [];
+  Future<User> getProfile() async {
+    var response = await _dio.client.get('/api/user/user_001');
     try {
-      for(var json in (response.data['resultado'] as List) ){
-        Publication publication = Publication.fromJson(json);
-        print(publication.urlImage);
-        list.add(publication);
-      }
-      print(list);
-      return list;
+        User user = User.fromJson(response.data['resultado'][0]);
+        print(user.uid);
+      return user;
     } on DioError catch (e) {
       if (e?.response?.data != null) {
         throw e.response.data;
