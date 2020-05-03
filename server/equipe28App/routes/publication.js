@@ -13,19 +13,16 @@ var myDbModel = new DbModel(tableName, connection)
 
 
 router.get(`/feed`, function (req, res, next) {
-    var uid = req.params.id;
 
     connection.query(`select p.*, u.url_avatar, u.name as name_user from ${tableName} as p left join users as u on p.uid_user=u.uid`, function (error, results, fields) {
         if (error) throw res.json({ status: "falha", resultado: error });
-        if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
+        if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado` });
 
         res.json({ status: "sucesso", resultado: results });
 
     });
 
 });
-
-
 
 
 router.get('/list', function (req, res, next) {
