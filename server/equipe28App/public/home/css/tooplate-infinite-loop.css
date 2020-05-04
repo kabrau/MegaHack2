@@ -148,7 +148,7 @@ blockquote {
 	/* background-color: #222; */
   /* background-image: url(../img/infinite-loop-01.jpg); */
   /* background-repeat: no-repeat; */
-  background-color: rgba(0,0,0,.5);
+  background-color:rgba(51, 85, 119, 0.5);
   height: 100vh;
   min-height: 375px;
   position: relative;
@@ -165,7 +165,7 @@ blockquote {
   z-index: -1;
 
   position: absolute;
-  opacity: .3;
+  opacity: .7;
   
   top: 0;
   bottom: 0;
