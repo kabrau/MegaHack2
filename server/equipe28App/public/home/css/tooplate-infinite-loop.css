@@ -267,12 +267,13 @@ blockquote {
 
 /* Testimonials */
 #testimonials {
-  color: white;
+  /* color: white;
   background-image: url(../img/infinite-loop-02.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-size: 100%;
-  position: relative;
+  position: relative; */
+  visibility: hidden;
 }
 
 @media (max-width: 991px) {
@@ -304,9 +305,9 @@ blockquote {
 }
 
 .tm-testimonial-item {
-  max-width: 290px;
-  margin-left: 35px;
-  margin-right: 35px;
+  max-width: 200px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .tm-testimonial-item img {
