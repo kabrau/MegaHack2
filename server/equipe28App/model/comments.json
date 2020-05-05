@@ -27,6 +27,22 @@
 			"Extra": ""
 		},
 		{
+			"Field": "user_name",
+			"Type": "char(150)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
+			"Field": "avatar_url",
+			"Type": "char(36)",
+			"Null": "YES",
+			"Key": "",
+			"Default": null,
+			"Extra": ""
+		},
+		{
 			"Field": "description",
 			"Type": "text",
 			"Null": "YES",

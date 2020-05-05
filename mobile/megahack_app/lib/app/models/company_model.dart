@@ -1,23 +1,27 @@
 class Company {
   String uid;
   String name;
+  String description;
+  String site;
   String cNPJ;
   String cEP;
   String uidCategory;
-  Null urlLogo;
-  Null foneContact;
+  String urlLogo;
+  String foneContact;
   String admUidUser;
-  Null adress;
-  Null adressNumber;
-  Null adressComplement;
-  Null city;
-  Null state;
+  String adress;
+  String adressNumber;
+  String adressComplement;
+  String city;
+  String state;
   String lastupdateDate;
   String lastupdateUidUser;
 
   Company(
       {this.uid,
         this.name,
+        this.description,
+        this.site,
         this.cNPJ,
         this.cEP,
         this.uidCategory,
@@ -35,6 +39,8 @@ class Company {
   Company.fromJson(Map<String, dynamic> json) {
     uid = json['uid'];
     name = json['name'];
+    description = json['description'];
+    site = json['site'];
     cNPJ = json['CNPJ'];
     cEP = json['CEP'];
     uidCategory = json['uid_category'];
@@ -54,6 +60,8 @@ class Company {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['uid'] = this.uid;
     data['name'] = this.name;
+    data['description'] = this.description;
+    data['site'] = this.site;
     data['CNPJ'] = this.cNPJ;
     data['CEP'] = this.cEP;
     data['uid_category'] = this.uidCategory;

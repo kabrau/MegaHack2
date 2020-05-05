@@ -6,8 +6,8 @@ class InputField extends StatelessWidget {
   final bool obscure;
   final IconData icon;
   final Function(String) onChanged;
-
-  InputField({this.hint, this.obscure, this.icon, this.onChanged});
+  final FormFieldValidator<String> validator;
+  InputField({this.hint, this.obscure, this.icon, this.onChanged, this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,7 @@ class InputField extends StatelessWidget {
       child: TextFormField(
         onChanged: onChanged,
         obscureText: obscure,
+        validator: validator,
         style: TextStyle(
           color: primaryColor,
         ),

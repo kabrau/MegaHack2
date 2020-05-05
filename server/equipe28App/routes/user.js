@@ -15,12 +15,12 @@ var myDbModel = new DbModel(tableName, connection)
 router.get(`/:id/feed`, function (req, res, next) {
     var uid = req.params.id;
 
-    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=0 and p.uid_user=?`, [uid], function (error, results, fields) {
+    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=0 and p.uid_user="${uid}"`, [uid], function (error, results, fields) {
         if (error) throw res.json({ status: "falha", resultado: error });
-        if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
-
-        res.json({ status: "sucesso", resultado: results });
-
+        if (results.length == 0) res.json({ status: "falha", resultado: results})
+        else{ 
+            res.json({ status: "sucesso", resultado: results });
+        };
     });
 
 });
@@ -28,13 +28,25 @@ router.get(`/:id/feed`, function (req, res, next) {
 router.get(`/:id/request`, function (req, res, next) {
     var uid = req.params.id;
 
-    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=1 and p.uid_user=?`, [uid], function (error, results, fields) {
+    connection.query(`select p.*, u.url_avatar, u.name as name_user from publications as p left join users as u on p.uid_user=u.uid where request=1 and p.uid_user="${uid}"`, [uid], function (error, results, fields) {
         if (error) throw res.json({ status: "falha", resultado: error });
-        if (results.length == 0) throw res.json({ status: "falha", resultado: `Nenhum registro foi encontrado ${uid}` });
+        if (results.length == 0) res.json({ status: "falha", resultado: results })
+        else{ 
+            res.json({ status: "sucesso", resultado: results });
+        };
+    })
 
-        res.json({ status: "sucesso", resultado: results });
+});
+router.get(`/:id/company`, function (req, res, next) {
+    var uid = req.params.id;
 
-    });
+    connection.query(`select * from companies where adm_uid_user="${uid}"`, [uid], function (error, results, fields) {
+        if (error) throw res.json({ status: "falha", resultado: error });
+        if (results.length == 0) res.json({ status: "falha", resultado: results })
+        else{ 
+            res.json({ status: "sucesso", resultado: results });
+        };
+    })
 
 });
 
@@ -86,19 +98,33 @@ router.get('/:id', function (req, res, next) {
 
 })
 
-router.get('/login/:loginName', function (req, res, next) {
+router.get('/login/:loginName/:password', function (req, res, next) {
 
     var loginName = req.params.loginName;
+    var {password}= req.params;
 
     myDbModel.dbGetList({ "nickname": loginName })
         .then((result) => {
-            if (result.length > 0)
-                res.json({ status: "sucesso", resultado: result[0] });
-            else
+            if (result.length > 0){
+                connection.query(`select * from users where nickname="${loginName}" and password="${password}"`, function (error, results, fields) {
+                    if (error) throw res.json({ status: "falha", resultado: error });
+                    if (results.length == 0) res.json({ status: "falha", resultado: {"message": "Usuario não encontrado"} })
+                    else{ 
+                        res.json({ status: "sucesso", resultado: results });
+                    };
+                });
+            } else
                 myDbModel.dbGetList({ "email": loginName })
                     .then((result) => {
-                        if (result.length > 0)
-                            res.json({ status: "sucesso", resultado: result[0] });
+                        if (result.length > 0){
+                            connection.query(`select * from users where email="${loginName}" and password="${password}"`, function (error, results, fields) {
+                                if (error) throw res.json({ status: "falha", resultado: error });
+                                if (results.length == 0) res.json({ status: "falha", resultado: {"message": "Usuario não encontrado"} })
+                                else{ 
+                                    res.json({ status: "sucesso", resultado: results });
+                                };
+                            });
+                        }
                         else
                             res.json({ status: "falha", resultado: "usuário não encontrado" });
                     })

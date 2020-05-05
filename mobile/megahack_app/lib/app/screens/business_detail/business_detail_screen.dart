@@ -7,6 +7,7 @@ import 'package:megahackapp/app/screens/business_map/business_map_screen.dart';
 import 'package:megahackapp/app/screens/portfolio_detail/portfolio_detail_screen.dart';
 import 'package:megahackapp/app/shared/constants.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BusinessDetailScreen extends StatelessWidget {
   final Company company;
@@ -26,40 +27,59 @@ class BusinessDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     controller.fetchPortfolios(company.uid);
+    controller.fetchCoordenate(company.adress,company.adressNumber,company.city, company.state);
     return Scaffold(
       appBar: AppBar(
-          title: Text(company.name)
+        backgroundColor: blankColor,
+        title: Text(
+          "${company.name}",
+          style: TextStyle(
+              color: primaryColor,
+              fontFamily: "AvenirLTStd Roman",
+              fontSize: 22),
+        ),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: primaryColor),
+        actions: <Widget>[
+         IconButton(
+           icon: Icon(Icons.map, color: primaryColor, size: 30,),
+           onPressed: (){
+             Navigator.of(context).push(
+                 MaterialPageRoute(
+                     builder: (context) => BusinessMapScreen(company: company, lat: controller.lat, lng: controller.lng,)
+                 ));
+           },
+         )
+        ],
       ),
       body: Container(
         child: ListView(
           children: <Widget>[
           Card(
-          elevation: 10,
-          child: Container(
+            margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))
+            ),
+              child: Container(
               width: MediaQuery
                   .of(context)
                   .size
                   .width,
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height / 2.5,
               child: Column(
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      IconButton( icon: Icon(Icons.star),
-                      onPressed: (){
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-
-                            builder: (context) => BusinessMapScreen()
-                          )
-                        );
-                      },),
-                      Text("(4,5)")
-                    ],
+                  Padding(
+                    padding: EdgeInsets.only(top: 10,right: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Icon(Icons.star, color: secondaryColor,),
+                        Text("(4,5)", style: TextStyle(
+                          color: secondaryColor,
+                          fontSize: 16
+                        ),)
+                      ],
+                    ),
                   ),
                   Container(
                       margin: EdgeInsets.all(10),
@@ -67,19 +87,20 @@ class BusinessDetailScreen extends StatelessWidget {
                       height: 150,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: FadeInImage.memoryNetwork(
+                          child: company.urlLogo != null ?
+                          FadeInImage.memoryNetwork(
                             placeholder: kTransparentImage,
-                            image: "https://cdn.portalcbncampinas.com.br/wp-content/uploads/2019/10/portalcbncampinas.com.br-portalcbncampinas.com_.br-ceasa-de-campinas-espera-5-de-crescimento-em-2019-na-venda-de-flores-para-o-dia-de-finados-whatsapp-image-2019-10-30-at-14.53.48.jpeg",
+                            image: "$APP_URL/images/${company.urlLogo}",
                             fit: BoxFit.cover,
                             width: MediaQuery
                                 .of(context)
                                 .size
                                 .width,
-                          )
+                          ) : AssetImage("assets/images/$unknownCompany"),
                       )
                   ),
                   Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,50 +109,83 @@ class BusinessDetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "Floricultura da Dona Lúcia",
+                              company.name,
                               style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20
+                                fontFamily: "AvenirLTStd Black",
+                                  fontSize: 20,
+                                color: primaryColor
                               ),
                             ),
-                            Text("Comércio - 1,0 km"),
-                            RichText(
-                              text: TextSpan(
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                        text: "Dona(o) "
-                                    ),
-                                    TextSpan(
-                                        text: 'Lúcia da Silva',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500
-                                        )
-                                    ),
-                                  ]
+                            GestureDetector(
+                              onTap: (){
+                                launch('http:${company.site}');
+                              },
+                              child: Text(
+                                company.site,
+                                style: TextStyle(
+                                    fontFamily: "AvenirLTStd Medium",
+                                    fontSize: 16,
+                                    color: primaryColor
+                                ),
                               ),
-                            )
+                            ),
+                            Text("Comércio - 1,0 km",
+                              style: TextStyle(
+                                  color: grey3Color
+                              ),
+                            ),
                           ],
                         ),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Icon(Icons.phone),
-                            Icon(Icons.chat)
+                           Padding(
+                             padding: EdgeInsets.only(right: 10),
+                             child: GestureDetector(
+                               onTap: (){
+                                 launch("tel:${company.foneContact}");
+                               },
+                               child: Icon(Icons.phone, color: secondaryColor,),
+                             )
+                           ),
+                            Padding(
+                                padding: EdgeInsets.only(right: 5),
+                                child: GestureDetector(
+                                  child: Icon(Icons.chat, color: secondaryColor,),
+                                )
+                            ),
                           ],
-                        )
+                        ),
+
                       ],
                     ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top:10),
+                    child: Text("Descrição",
+                      style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 18
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 10),
+                        child: Text("${company.description}",
+                          style: TextStyle(
+                            color: primaryColor,
+                            fontSize: 14,
+                          ),
+                          maxLines: null,
+                        ),
                   )
                 ],
               )
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(10),
-          child: Text("Portfólio"),
+          padding: EdgeInsets.only(left: 15, top: 15, bottom: 10),
+          child: Text("Portfólio", style: TextStyle(color: primaryColor, fontSize: 16),),
         ),
         Observer(
           builder: (_) {
@@ -139,11 +193,12 @@ class BusinessDetailScreen extends StatelessWidget {
                 controller.listPortfolio.value != null) {
               var list = controller.listPortfolio.value;
               return Container(
+                margin: EdgeInsets.only(left: 15),
                 width: MediaQuery
                     .of(context)
                     .size
                     .width,
-                height: 100,
+                height: 130,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: list.length,
@@ -156,21 +211,30 @@ class BusinessDetailScreen extends StatelessWidget {
                                   PortfolioDetail(list[index])));
                         },
                         child: Container(
-                            margin: EdgeInsets.all(10),
-                            width: 200,
-                            height: 150,
-                            decoration: BoxDecoration(
-                                color: greyColor,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(10.0))
-                            ),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.network(
-                                  "http://equipe28.azurewebsites.net/images/${list[index]
-                                      .urlImage}", fit: BoxFit.cover,)
-                            )
-                        ),
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                  width: 200,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                      color: greyColor,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0))
+                                  ),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.network(
+                                        "$APP_URL/images/${list[index]
+                                            .urlImage}", fit: BoxFit.cover,)
+                                  )
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 5),
+                                child: Text("${list[index].productName}", style: TextStyle(color: primaryColor),),
+                              )
+                            ],
+                          ),
+                        )
                       );
                     }),
               );
@@ -187,11 +251,10 @@ class BusinessDetailScreen extends StatelessWidget {
             }
           },
         ),
-        Row(
-          children: <Widget>[
-            Text("Comentários"),
-          ],
-        ),
+            Padding(
+              padding: EdgeInsets.only(left: 15, top: 15, bottom: 10),
+              child: Text("Comentários", style: TextStyle(color: primaryColor, fontSize: 16),),
+            ),
         Card(
           elevation: 10,
           child: Row(
@@ -206,7 +269,7 @@ class BusinessDetailScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                                image: AssetImage("assets/images/person_avatar.png"),
+                                image: AssetImage("assets/images/$unknownAvatar"),
                                 fit: BoxFit.cover
                             )),
                       ),
@@ -223,16 +286,16 @@ class BusinessDetailScreen extends StatelessWidget {
                             Row(
                               children: <Widget>[
                                 Text("$i,0"),
-                                Icon(this.i >= 1 ? Icons.star : Icons.star_border, size: 20,),
-                                Icon(this.i >= 2 ? Icons.star : Icons.star_border, size: 20),
-                                Icon(this.i >= 3 ? Icons.star : Icons.star_border, size: 20),
-                                Icon(this.i >= 4 ? Icons.star : Icons.star_border, size: 20),
-                                Icon(this.i == 5 ? Icons.star : Icons.star_border, size: 20),
+                                Icon(this.i >= 1 ? Icons.star : Icons.star_border, size: 20, color: secondaryColor),
+                                Icon(this.i >= 2 ? Icons.star : Icons.star_border, size: 20, color: secondaryColor),
+                                Icon(this.i >= 3 ? Icons.star : Icons.star_border, size: 20, color: secondaryColor),
+                                Icon(this.i >= 4 ? Icons.star : Icons.star_border, size: 20, color: secondaryColor),
+                                Icon(this.i == 5 ? Icons.star : Icons.star_border, size: 20, color: secondaryColor,),
                               ],
                             ),
                            Container(
                              margin: EdgeInsets.only(top: 10),
-                                child: Text("Flores lindas bem! Vou comprar mais vezes"),
+                                child: Text("Produtos de boa qualidade!"),
                             ),
                           ],
                         ),

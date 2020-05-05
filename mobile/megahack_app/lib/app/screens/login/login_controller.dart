@@ -1,3 +1,4 @@
+import 'package:megahackapp/app/screens/login/login_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'login_controller.g.dart';
@@ -5,6 +6,7 @@ part 'login_controller.g.dart';
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
+  final repository = LoginRepository();
   @observable
   String login;
 
@@ -21,4 +23,8 @@ abstract class _LoginControllerBase with Store {
 
   @action
   changePassword(value) => password = value;
+
+  loginUser() async{
+    return await repository.loginUser(login, password);
+  }
 }

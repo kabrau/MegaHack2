@@ -14,7 +14,7 @@ abstract class _SearchControllerBase with Store {
 
 
   fecthCompany(){
-    listCompany = repository.getCompany().asObservable();
+    return listCompany = repository.getCompany().asObservable();
   }
 
 }

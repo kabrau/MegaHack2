@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 70),
-                    child: Image.asset("assets/images/logo_screen.png", height: 131, width: 133,),
+                    child: Image.asset("assets/images/LogoAquiPerto.png", height: 131, width: 200,),
                   ),
                   FormContainer(controller),
                 ],

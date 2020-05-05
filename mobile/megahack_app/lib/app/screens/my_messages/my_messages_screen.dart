@@ -44,7 +44,7 @@ class MyMessagesScreen extends StatelessWidget {
                                           shape: BoxShape.circle,
                                           image: DecorationImage(
                                               image: AssetImage(
-                                                  "assets/images/person_avatar.png"),
+                                                  "assets/images/$unknownAvatar"),
                                               fit: BoxFit.cover)),
                                     ),
                                     Positioned(

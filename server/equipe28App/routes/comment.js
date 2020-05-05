@@ -49,11 +49,11 @@ router.delete('/delete/:id', function (req, res, next) {
 
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/:idPublication', function (req, res, next) {
 
-    var uid = req.params.id;
+    var {idPublication} = req.params;
 
-    myDbModel.dbGetList({"uid":uid})
+    myDbModel.dbGetList({"uid_publication": idPublication})
         .then((result) => { res.json({ status: "sucesso", resultado: result }); })
         .catch((err) => { res.json({ status: "falha", resultado: err }); })
 
