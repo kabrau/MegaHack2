@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const APP_URL = "http://10.0.2.2:3000";
+const APP_URL = "http://equipe28.azurewebsites.net";
 
 var primaryColor = Color(0xff335577);
 var secondaryColor = Color(0xffF8921F);

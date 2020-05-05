@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:megahackapp/app/models/coordenate_model.dart';
 import 'package:megahackapp/app/models/portfolio_model.dart';
 import 'package:megahackapp/app/shared/custom_dio/custom_dio.dart';
-import 'package:megahackapp/app/shared/env_constants.dart';
 
 class BusinessRepository {
   final _dio = CustomDio();

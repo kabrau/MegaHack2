@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:megahackapp/app/models/user_model.dart';
 import 'package:megahackapp/app/screens/create_business/components/form_business.dart';
 import 'package:megahackapp/app/screens/create_business/create_business_controller.dart';
 import 'package:megahackapp/app/shared/constants.dart';
 
 class CreateBusinessScreen extends StatelessWidget {
+  final User user;
+  CreateBusinessScreen(this.user);
   final controller = CreateBusinessController();
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class CreateBusinessScreen extends StatelessWidget {
       body: Container(
         child: ListView(
           children: <Widget>[
-            FormContainer(controller)
+            FormContainer(controller, user)
           ],
         ),
       ),

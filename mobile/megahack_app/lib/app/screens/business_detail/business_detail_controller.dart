@@ -2,7 +2,6 @@ import 'package:geocoder/geocoder.dart';
 import 'package:megahackapp/app/models/coordenate_model.dart';
 import 'package:megahackapp/app/models/portfolio_model.dart';
 import 'package:megahackapp/app/screens/business_detail/business_detail_repository.dart';
-import 'package:megahackapp/app/shared/env_constants.dart';
 import 'package:mobx/mobx.dart';
 
 part 'business_detail_controller.g.dart';

@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:megahackapp/app/screens/business_detail/business_detail_screen.dart';
 import 'package:megahackapp/app/screens/search/search_controller.dart';
 import 'package:megahackapp/app/shared/constants.dart';
+import 'package:megahackapp/app/shared/utils/company_search.dart';
 class SearchScreen extends StatefulWidget {
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -41,7 +42,12 @@ class _SearchScreenState extends State<SearchScreen> {
               width: MediaQuery.of(context).size.width,
               child: Row(
                 children: <Widget>[
-                  Icon(Icons.search, color: primaryColor, size: 24),
+                  GestureDetector(
+                    onTap: (){
+                      showSearch(context: context, delegate: CompanySearch(controller.fecthCompany()));
+                    },
+                    child: Icon(Icons.search, color: primaryColor, size: 24),
+                  ),
                   Text(" Procurar ")
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:cpf_cnpj_validator/cnpj_validator.dart';
+import 'package:megahackapp/app/models/company_model.dart';
 import 'package:megahackapp/app/models/user_model.dart';
 import 'package:megahackapp/app/screens/create_business/create_business_repository.dart';
 import 'package:megahackapp/app/screens/create_publication/create_publication_repository.dart';
@@ -81,7 +82,10 @@ abstract class _CreateBusinessControllerBase with Store {
   @action
   changeMobile(value) => mobile = value;
   @action
-  changeEmail(value) => site = value;
+  changeSite(value) => site = value;
+
+  @observable
+  ObservableFuture<Company> company;
 
   String validateName(value){
     if(value.isEmpty){
@@ -144,7 +148,7 @@ abstract class _CreateBusinessControllerBase with Store {
     return null;
   }
 
-  registerUser() async{
-//    return await repository.registerUser(name, category, site, password);
+  registerCompany(uid) async{
+    return await repository.createBusiness(name,"aa",uid, site,cnpj,cep,category,mobile,address,number,city,state);
   }
 }

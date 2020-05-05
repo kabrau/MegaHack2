@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:megahackapp/app/models/user_model.dart';
 import 'package:megahackapp/app/screens/create_business/create_business_controller.dart';
 import 'package:megahackapp/app/screens/create_business/create_business_screen.dart';
 import 'package:megahackapp/app/screens/profile/profile_controller.dart';
@@ -73,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 cardWidget(
                     Icons.business, primaryColor, "Gerenciar meu Negócio", (){
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context)=> CreateBusinessScreen()
+                        builder: (context)=> CreateBusinessScreen(controller.user)
                       ));
                 }),
                 cardWidget(

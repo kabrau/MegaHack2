@@ -37,6 +37,18 @@ router.get(`/:id/request`, function (req, res, next) {
     })
 
 });
+router.get(`/:id/company`, function (req, res, next) {
+    var uid = req.params.id;
+
+    connection.query(`select * from companies where adm_uid_user="${uid}"`, [uid], function (error, results, fields) {
+        if (error) throw res.json({ status: "falha", resultado: error });
+        if (results.length == 0) res.json({ status: "falha", resultado: results })
+        else{ 
+            res.json({ status: "sucesso", resultado: results });
+        };
+    })
+
+});
 
 
 router.get('/list', function (req, res, next) {

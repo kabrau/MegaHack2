@@ -237,6 +237,23 @@ mixin _$CreateBusinessController on _CreateBusinessControllerBase, Store {
     }, _$stateAtom, name: '${_$stateAtom.name}_set');
   }
 
+  final _$companyAtom = Atom(name: '_CreateBusinessControllerBase.company');
+
+  @override
+  ObservableFuture<Company> get company {
+    _$companyAtom.context.enforceReadPolicy(_$companyAtom);
+    _$companyAtom.reportObserved();
+    return super.company;
+  }
+
+  @override
+  set company(ObservableFuture<Company> value) {
+    _$companyAtom.context.conditionallyRunInAction(() {
+      super.company = value;
+      _$companyAtom.reportChanged();
+    }, _$companyAtom, name: '${_$companyAtom.name}_set');
+  }
+
   final _$getCurrentUserAsyncAction = AsyncAction('getCurrentUser');
 
   @override
@@ -358,11 +375,11 @@ mixin _$CreateBusinessController on _CreateBusinessControllerBase, Store {
   }
 
   @override
-  dynamic changeEmail(dynamic value) {
+  dynamic changeSite(dynamic value) {
     final _$actionInfo =
         _$_CreateBusinessControllerBaseActionController.startAction();
     try {
-      return super.changeEmail(value);
+      return super.changeSite(value);
     } finally {
       _$_CreateBusinessControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -371,7 +388,7 @@ mixin _$CreateBusinessController on _CreateBusinessControllerBase, Store {
   @override
   String toString() {
     final string =
-        'description: ${description.toString()},loading: ${loading.toString()},user: ${user.toString()},name: ${name.toString()},cnpj: ${cnpj.toString()},mobile: ${mobile.toString()},site: ${site.toString()},category: ${category.toString()},address: ${address.toString()},cep: ${cep.toString()},number: ${number.toString()},city: ${city.toString()},state: ${state.toString()},isValid: ${isValid.toString()}';
+        'description: ${description.toString()},loading: ${loading.toString()},user: ${user.toString()},name: ${name.toString()},cnpj: ${cnpj.toString()},mobile: ${mobile.toString()},site: ${site.toString()},category: ${category.toString()},address: ${address.toString()},cep: ${cep.toString()},number: ${number.toString()},city: ${city.toString()},state: ${state.toString()},company: ${company.toString()},isValid: ${isValid.toString()}';
     return '{$string}';
   }
 }
