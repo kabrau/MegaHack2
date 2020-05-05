@@ -13,9 +13,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     controller.fecthCompany();
-
     super.initState();
   }
   @override
@@ -87,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     child: ClipRRect(
                                         borderRadius: BorderRadius.circular(8.0),
                                         child: Image.network(
-                                          "https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_1280.jpg", fit: BoxFit.cover, )
+                                          "$APP_URL/images/${list[index].urlLogo}", fit: BoxFit.cover, )
                                     )
                                 ),
                               );

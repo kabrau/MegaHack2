@@ -9,39 +9,50 @@ part of 'profile_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProfileController on _ProfileControllerBase, Store {
+  final _$loadingAtom = Atom(name: '_ProfileControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.context.enforceReadPolicy(_$loadingAtom);
+    _$loadingAtom.reportObserved();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.context.conditionallyRunInAction(() {
+      super.loading = value;
+      _$loadingAtom.reportChanged();
+    }, _$loadingAtom, name: '${_$loadingAtom.name}_set');
+  }
+
   final _$userAtom = Atom(name: '_ProfileControllerBase.user');
 
   @override
-  ObservableFuture<User> get user {
+  User get user {
     _$userAtom.context.enforceReadPolicy(_$userAtom);
     _$userAtom.reportObserved();
     return super.user;
   }
 
   @override
-  set user(ObservableFuture<User> value) {
+  set user(User value) {
     _$userAtom.context.conditionallyRunInAction(() {
       super.user = value;
       _$userAtom.reportChanged();
     }, _$userAtom, name: '${_$userAtom.name}_set');
   }
 
-  final _$_ProfileControllerBaseActionController =
-      ActionController(name: '_ProfileControllerBase');
+  final _$getCurrentUserAsyncAction = AsyncAction('getCurrentUser');
 
   @override
-  dynamic getCurrentUser() {
-    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction();
-    try {
-      return super.getCurrentUser();
-    } finally {
-      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future getCurrentUser(dynamic context) {
+    return _$getCurrentUserAsyncAction.run(() => super.getCurrentUser(context));
   }
 
   @override
   String toString() {
-    final string = 'user: ${user.toString()}';
+    final string = 'loading: ${loading.toString()},user: ${user.toString()}';
     return '{$string}';
   }
 }

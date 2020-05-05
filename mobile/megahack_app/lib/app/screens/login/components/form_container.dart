@@ -10,12 +10,13 @@ import 'package:megahackapp/app/shared/constants.dart';
 class FormContainer extends StatelessWidget {
   final LoginController controller;
   FormContainer(this.controller);
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 73, bottom: 26, right: 44 , left: 44),
       child: Form(
+        key: _formKey,
         child: Column(
           children: <Widget>[
             Column(
@@ -52,15 +53,21 @@ class FormContainer extends StatelessWidget {
                return  ButtonWidget(
                  width: 288,
                  height: 51,
-                 value: Text("ENTRAR"),
+                 value: "ENTRAR",
                  isValid: controller.isValid,
-                 onTap: (){
-                   Navigator.pushAndRemoveUntil(context,
-                       MaterialPageRoute(
-                           builder: (context) => MainScaffoldScreen()
-                       ),
-                           (Route<dynamic> route) => false
-                   );
+                 onTap: () async{
+                  var response = await controller.loginUser();
+                  if(response == "sucesso"){
+                    print("Response 200");
+                    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                      builder: (context)=> MainScaffoldScreen())
+                    ,(Route<dynamic> route) => false);
+                  } else{
+                    Scaffold.of(context).showSnackBar(new SnackBar(
+                      backgroundColor: Colors.redAccent,
+                      content: Text('Login ou usuario incorretos'),
+                    ));
+                  }
                  },
                );
              }
@@ -92,7 +99,7 @@ class FormContainer extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                            text: "Junte-se a vizinhaça! "
+                            text: "Junte-se à vizinhaça! "
                         ),
                         TextSpan(
                             text: 'Inscreva-se',

@@ -17,7 +17,11 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
+  geocoder:
+  url_launcher: ^5.0.2
+  flutter_speed_dial:
   google_maps_flutter:
+  cpf_cnpj_validator: ^1.0.5
   transparent_image:
   shimmer:
   dio: ^3.0.9

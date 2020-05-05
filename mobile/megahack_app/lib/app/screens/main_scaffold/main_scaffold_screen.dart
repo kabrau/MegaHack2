@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:megahackapp/app/screens/chat/chat_screen.dart';
 import 'package:megahackapp/app/screens/create_publication/create_publication_screen.dart';
+import 'package:megahackapp/app/screens/create_request/create_request_screen.dart';
 import 'package:megahackapp/app/screens/home/home_screen.dart';
 import 'package:megahackapp/app/screens/main_scaffold/components/app_bar.dart';
 import 'package:megahackapp/app/screens/main_scaffold/components/bottom_app_bar.dart';
@@ -18,6 +20,12 @@ class MainScaffoldScreen extends StatefulWidget {
 }
 
 class _MainScaffoldScreenState extends State<MainScaffoldScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    controller.fetchCategories();
+    super.initState();
+  }
   final controller = MainScaffoldController();
     List lisPages = [
       () => HomeScreen(),
@@ -59,18 +67,53 @@ class _MainScaffoldScreenState extends State<MainScaffoldScreen> {
                 elevation: 0,
               ),
               body: lisPages[controller.selectedIndex](),
-             floatingActionButton: FloatingActionButton(
-                onPressed: (){
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CreatePublicationScreen(),
-                    )
-                  );
-                },
-                backgroundColor: secondaryColor,
-                child: Icon(Icons.add, size: 28,),
-              ),
-              floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+             floatingActionButton: SpeedDial(
+               backgroundColor: secondaryColor,
+               child: Icon(Icons.more_horiz),
+               marginRight: MediaQuery.of(context).size.width/2.35,
+               marginBottom: -25,
+               children: [
+                 SpeedDialChild(
+                   backgroundColor: primaryColor,
+                   child: Icon(
+                     Icons.create,
+                     color: blankColor,
+                     size: 25,
+                   ),
+                   label: "Publicar",
+                   onTap: (){
+                     Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CreatePublicationScreen(),
+                      )
+                    );
+                   }
+                 ),
+                 SpeedDialChild(
+                   backgroundColor: primaryColor,
+                     child: Icon(
+                       Icons.announcement,
+                       color: blankColor,
+                       size: 25,
+                     ),
+                     label: "Fazer pedido",
+                     onTap: (){
+                       Navigator.of(context).push(
+                           MaterialPageRoute(
+                             builder: (context) => CreateRequestScreen(),
+                           )
+                       );
+                     }
+                 )
+               ],
+             ),
+//                onPressed: (){
+//                  Navigator.of(context).push(
+//                    MaterialPageRoute(
+//                      builder: (context) => CreatePublicationScreen(),
+//                    )
+//                  );
+//                },
               bottomNavigationBar: CustomBottomBar(controller)
           );
         },

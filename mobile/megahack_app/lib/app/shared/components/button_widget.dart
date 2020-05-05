@@ -3,7 +3,7 @@ import 'package:megahackapp/app/shared/constants.dart';
 
 class ButtonWidget extends StatelessWidget {
 
-  final Widget value;
+  final String value;
   final bool isValid;
   final Function onTap;
   final double width;
@@ -29,11 +29,7 @@ class ButtonWidget extends StatelessWidget {
           height: height,
           alignment: Alignment.center,
           decoration: isValid ? BoxDecoration(
-              gradient: LinearGradient(
-                colors: [terciaryColor, primaryColor],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
+              color: Color(0xffF7921E) ,
               boxShadow: <BoxShadow>[
                 BoxShadow(
                   color: Colors.black87,
@@ -43,12 +39,12 @@ class ButtonWidget extends StatelessWidget {
               ],
               borderRadius: BorderRadius.all(Radius.circular(50))
           ) : BoxDecoration(
-              color: Color(0xff8BBBEA),
+              color: Color(0xffF5C38A),
               borderRadius: BorderRadius.all(Radius.circular(50))
           ),
           child: Center(
             child: Text(
-              "ENTRAR",
+              value,
               style: TextStyle(
                   color: blankColor,
                   fontSize: 18,

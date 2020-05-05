@@ -1,11 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:megahackapp/app/models/publication_model.dart';
 import 'package:megahackapp/app/shared/constants.dart';
 
-class PublicationCardWidget extends StatelessWidget {
+class PublicationCardWidget extends StatefulWidget {
   final Publication publication;
-  PublicationCardWidget(this.publication);
+  final Function onTapComment;
+  PublicationCardWidget(this.publication, this.onTapComment);
+  @override
+  _PublicationCardWidgetState createState() => _PublicationCardWidgetState();
+}
 
+class _PublicationCardWidgetState extends State<PublicationCardWidget> {
+  bool like = false;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -31,16 +38,22 @@ class PublicationCardWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                                image: publication.urlAvatar != null ?
-                                NetworkImage("http://equipe28.azurewebsites.net/images/${publication.urlAvatar}") :
-                                AssetImage("assets/images/person_avatar.png"),
+                                image: this.widget.publication.urlAvatar != null ?
+                                NetworkImage("$APP_URL/images/${this.widget.publication.urlAvatar}") :
+                                AssetImage("assets/images/$unknownAvatar"),
                                 fit: BoxFit.cover
                             )),
                       ),
-                      Text(publication.uidUser ?? "",
+                      Container(
+                        width: 200,
+                        child:  Text(this.widget.publication.nameUser ?? "",
                           style: TextStyle(
-                              fontSize: 18, color: blackColor,
-                              fontFamily: "AvenirLTStd Light")),
+                              fontSize: 15, color: blackColor,
+                              fontFamily: "AvenirLTStd Light"),
+                          maxLines: 1 ,
+
+                        ),
+                      )
                     ],
                   ),
                   Text("1 hora atrás" ?? "",
@@ -59,14 +72,15 @@ class PublicationCardWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child:  Container(
-                child: Text(publication.description),
+                child: Text(this.widget.publication.description, maxLines: 1,),
               ),
             ),
-            publication.urlImage != null ? Container(
+            this.widget.publication.urlImage != null && this.widget.publication.urlImage != "" ? Container(
+              color: greyColor,
               width: MediaQuery.of(context).size.width,
               height: 200,
               margin: EdgeInsets.only(top: 10),
-              child: Image.network("http://equipe28.azurewebsites.net/images/${publication.urlImage}", fit: BoxFit.fitWidth,),
+              child: Image.network("$APP_URL/images/${this.widget.publication.urlImage}", fit: BoxFit.scaleDown,),
             ) : Container(),
             Padding(
               padding: EdgeInsets.only(top: 11, left: 14, right: 14, bottom: 13),
@@ -75,6 +89,7 @@ class PublicationCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   GestureDetector(
+                    onTap: this.widget.onTapComment,
                     child: Row(
                       children: <Widget>[
                         Icon(Icons.chat_bubble, color: primaryColor,),
@@ -87,10 +102,15 @@ class PublicationCardWidget extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        like = like ? false : true;
+                      });
+                    },
                     child: Row(
                       children: <Widget>[
-                        Icon(Icons.favorite, color: Color(0xffC10000),),
-                        Text("10",
+                        Icon(like ? Icons.favorite : Icons.favorite_border, color: Color(0xffC10000),),
+                        Text(like ? "10": "  9",
                           style: TextStyle(
                               color: grey3Color
                           ),

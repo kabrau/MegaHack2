@@ -13,20 +13,20 @@ import 'package:megahackapp/app/shared/custom_dio/custom_dio.dart';
 class ProfileRepository {
   final _dio = CustomDio();
 
-  Future<User> getProfile() async {
-    var response = await _dio.client.get('/api/user/user_001');
-    try {
-        User user = User.fromJson(response.data['resultado'][0]);
-        print(user.uid);
-      return user;
-    } on DioError catch (e) {
-      if (e?.response?.data != null) {
-        throw e.response.data;
-      } else {
-        throw ('Falha ao comunicar com o servidor.');
-      }
-    }
-  }
+//  Future<User> getProfile() async {
+//    var response = await _dio.client.get('/api/user/user_001');
+//    try {
+//        User user = User.fromJson(response.data['resultado'][0]);
+//        print(user.uid);
+//      return user;
+//    } on DioError catch (e) {
+//      if (e?.response?.data != null) {
+//        throw e.response.data;
+//      } else {
+//        throw ('Falha ao comunicar com o servidor.');
+//      }
+//    }
+//  }
 
 //  Future<List<CashTransaction>> getCashTransaction(String moedaId, String start, String pageSize) async {
 //    var response = await _dio.client.get(
