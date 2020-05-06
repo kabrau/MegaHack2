@@ -5,7 +5,7 @@ Projeto realizado para o **MEGAHACK 2020 2° Edição**, para o **DESAFIO SEBRAE
 [AquiPerto](https://equipe28.azurewebsites.net/home/) é uma plataforma que simplifica a solução de seus problemas. Conectamos você à empresas e especialistas locais, não apenas para vender produtos e serviços, mas para ajudá-lo a encontrar soluções para o que precisa.
 
 ### MVP
-<img src = "mobile/megahack_app/assets/images/gif_aquiperto.gif>" height="600em"/>
+<img src = "mobile/megahack_app/assets/images/gif_aquiperto.gif" height="600em"/>
 
 ### Time 28 - Participantes
 * Jeferson Carvalho - **UI/UX Goiânia/GO** [LinkedIN](https://www.linkedin.com/in/jeferson1f/) [Behance](https://www.behance.net/jeferson1f)
